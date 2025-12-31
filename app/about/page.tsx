@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { aboutData } from '@/data/data';
+// import WhyChooseUs from '@/components/WhyChooseUs';
 
 export default function AboutPage() {
     return (
@@ -13,7 +14,7 @@ export default function AboutPage() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
-            style={{ paddingTop: '100px', minHeight: '100vh' }}
+            style={{ paddingTop: '100px', minHeight: '100vh', paddingBottom: '4rem' }}
         >
             <div className="container">
                 <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', marginBottom: '2rem', color: 'var(--color-text-light)' }}>
@@ -47,7 +48,7 @@ export default function AboutPage() {
                 </div>
 
                 <h2 style={{ fontSize: '1.8rem', color: 'var(--color-text-light)', marginBottom: '2rem' }}>Our Core Values</h2>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem', marginBottom: '4rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem', marginBottom: '6rem' }}>
                     {aboutData.values.map((value, index) => (
                         <div key={index} style={{ padding: '2rem', backgroundColor: 'var(--color-primary-light)', borderRadius: '8px' }}>
                             <h3 style={{ fontSize: '1.3rem', color: 'var(--color-accent)', marginBottom: '1rem' }}>{value.title}</h3>
@@ -56,6 +57,8 @@ export default function AboutPage() {
                     ))}
                 </div>
             </div>
+            
+            {/* <WhyChooseUs /> */}
         </motion.div>
     );
 }
