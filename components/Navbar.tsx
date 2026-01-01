@@ -25,7 +25,7 @@ const Navbar = () => {
         { name: 'About', path: '/about', hash: '#about' },
         { name: 'Services', path: '/services', hash: '#services' },
         { name: 'Portfolio', path: '/', hash: '#portfolio' },
-        { name: 'Contact', path: '/', hash: '#contact' },
+        // { name: 'Contact', path: '/', hash: '#contact' },
     ];
 
     const handleNavClick = (e: React.MouseEvent, link: { path: string; hash: string }) => {
@@ -75,26 +75,39 @@ const Navbar = () => {
 
                 {/* Desktop Menu */}
                 <div className="desktop-menu" style={{ display: 'none' }}>
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.name}
-                            href={link.path}
-                            onClick={(e) => handleNavClick(e, link)}
-                            style={{
-                                marginLeft: '2rem',
-                                color: 'var(--color-text-light)',
-                                fontSize: '0.9rem',
-                            }}
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        {navLinks.map((link) => (
+                            <Link
+                                key={link.name}
+                                href={link.path}
+                                onClick={(e) => handleNavClick(e, link)}
+                                style={{
+                                    marginLeft: '2rem',
+                                    color: 'var(--color-text-light)',
+                                    fontSize: '0.85rem',
+                                    fontWeight: '500',
+                                    transition: 'color 0.3s ease',
+                                }}
+                                onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-accent)'}
+                                onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text-light)'}
+                            >
+                                {link.name}
+                            </Link>
+                        ))}
+                        <a 
+                            href="#contact" 
+                            className="btn-primary" 
+                            style={{ marginLeft: '2.5rem', fontSize: '0.85rem', padding: '0.6rem 1.25rem' }}
+                            onClick={(e) => handleNavClick(e, { path: '/', hash: '#contact' })}
                         >
-                            <span style={{ color: 'var(--color-accent)', marginRight: '5px' }}></span>
-                            {link.name}
-                        </Link>
-                    ))}
+                            Get a Quote
+                        </a>
+                    </div>
                 </div>
 
                 {/* Mobile Menu Button */}
-                <div className="mobile-menu-btn" onClick={toggleMenu} style={{ cursor: 'pointer', color: 'var(--color-accent)' }}>
-                    {isOpen ? <X size={30} /> : <Menu size={30} />}
+                <div className="mobile-menu-btn" onClick={toggleMenu} style={{ cursor: 'pointer', color: 'var(--color-accent)', padding: '5px' }}>
+                    {isOpen ? <X size={28} /> : <Menu size={28} />}
                 </div>
             </div>
 
@@ -105,14 +118,13 @@ const Navbar = () => {
                         initial={{ opacity: 0, x: '100%' }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: '100%' }}
-                        transition={{ duration: 0.3 }}
+                        transition={{ duration: 0.4, ease: [0.645, 0.045, 0.355, 1] }}
                         style={{
                             position: 'fixed',
                             top: 0,
                             right: 0,
                             bottom: 0,
-                            width: '75vw',
-                            maxWidth: '400px',
+                            width: 'min(75vw, 400px)',
                             backgroundColor: 'var(--color-primary-light)',
                             padding: '2rem',
                             display: 'flex',
@@ -124,26 +136,39 @@ const Navbar = () => {
                         }}
                     >
                         <div style={{ position: 'absolute', top: '2rem', right: '2rem', cursor: 'pointer', color: 'var(--color-accent)' }} onClick={toggleMenu}>
-                            <X size={30} />
+                            <X size={32} />
                         </div>
-                        {navLinks.map((link, index) => (
-                            <Link
-                                key={link.name}
-                                href={link.path}
-                                onClick={(e) => handleNavClick(e, link)}
-                                style={{
-                                    margin: '1.5rem 0',
-                                    fontSize: '1.2rem',
-                                    color: 'var(--color-text-light)',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
-                                }}
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+                            {navLinks.map((link, index) => (
+                                <Link
+                                    key={link.name}
+                                    href={link.path}
+                                    onClick={(e) => handleNavClick(e, link)}
+                                    style={{
+                                        margin: '1.25rem 0',
+                                        fontSize: '1.2rem',
+                                        color: 'var(--color-text-light)',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        alignItems: 'center',
+                                        transition: 'color 0.3s ease',
+                                    }}
+                                    onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-accent)'}
+                                    onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text-light)'}
+                                >
+                                    <span style={{ color: 'var(--color-accent)', marginBottom: '5px', fontSize: '0.85rem', fontFamily: 'var(--font-mono)' }}>0{index + 1}.</span>
+                                    {link.name}
+                                </Link>
+                            ))}
+                            <a 
+                                href="#contact" 
+                                className="btn-primary" 
+                                style={{ marginTop: '2.5rem', width: '80%', textAlign: 'center' }}
+                                onClick={(e) => handleNavClick(e, { path: '/', hash: '#contact' })}
                             >
-                                <span style={{ color: 'var(--color-accent)', marginBottom: '5px', fontSize: '0.9rem' }}>0{index + 1}.</span>
-                                {link.name}
-                            </Link>
-                        ))}
+                                Get a Quote
+                            </a>
+                        </div>
                     </motion.div>
                 )}
             </AnimatePresence>

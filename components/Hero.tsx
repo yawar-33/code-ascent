@@ -67,7 +67,7 @@ const Hero = () => {
       <div className="container mx-auto px-4 h-full flex flex-col md:flex-row items-center justify-between gap-12">
         {/* Left Column: Text Content */}
         <div className="w-full md:w-1/2 flex flex-col justify-center order-1 md:order-1 z-10">
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
@@ -81,12 +81,12 @@ const Hero = () => {
             >
               Hi, we are
             </h4>
-          </motion.div>
+          </motion.div> */}
 
           {/* Animated Main Headline */}
           <div style={{ minHeight: "140px", marginBottom: "0.5rem" }}>
             {/* <AnimatePresence mode="wait" key={"waot"}> */}
-               <motion.div
+               {/* <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.2 }}
@@ -96,11 +96,11 @@ const Hero = () => {
                         fontWeight: 'bold',
                         color: 'var(--color-text-light)',
                         lineHeight: 1.1,
-                        marginBottom: '1rem'
+                        marginBottom: '1.5rem'
                     }}>
                         Code Ascent.
                     </h1>
-                </motion.div>
+                </motion.div> */}
 
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}
@@ -108,13 +108,14 @@ const Hero = () => {
                     transition={{ duration: 0.5, delay: 0.3 }}
                 >
                     <h2 style={{
-                        fontSize: 'clamp(30px, 6vw, 60px)',
+                        fontSize: 'clamp(30px, 5vw, 50px)',
                         fontWeight: 'bold',
                         color: 'var(--color-text)',
-                        lineHeight: 1.1,
+                        lineHeight: 1.2,
                         marginBottom: '2rem'
                     }}>
-                        We build digital experiences.
+                        We build digital experiences <br className="hidden md:block" />
+                        <span style={{ color: 'var(--color-accent)' }}>that grow revenue.</span>
                     </h2>
                 </motion.div>
             {/* </AnimatePresence> */}
@@ -123,22 +124,21 @@ const Hero = () => {
           <div
             style={{
               maxWidth: "600px",
-              minHeight: "100px",
               marginBottom: "3rem",
             }}
           >
-            <AnimatePresence mode="wait">
-              <motion.p
-                key={index}
+            <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5 }}
-                style={{ fontSize: "1.1rem" }}
-              >
-                {descriptions[index % descriptions.length]}
-              </motion.p>
-            </AnimatePresence>
+                transition={{ duration: 0.5, delay: 0.4 }}
+            >
+                <p style={{ fontSize: "1.2rem", color: "var(--color-text-light)", marginBottom: "1rem" }}>
+                    We craft scalable software, beautiful interfaces, and digital tools that users love.
+                </p>
+                <p style={{ fontSize: "1.1rem", color: "var(--color-text)" }}>
+                    From idea to launch — we’re your full-stack partner.
+                </p>
+            </motion.div>
           </div>
 
           <motion.div

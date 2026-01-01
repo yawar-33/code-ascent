@@ -78,21 +78,30 @@ const Portfolio = () => {
                                 </div>
                             </div>
                             <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                                    <h3 style={{ fontSize: '1.3rem', color: 'var(--color-text-light)', margin: 0 }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                                    <h3 style={{ fontSize: '1.3rem', color: 'var(--color-text-light)', margin: 0, fontWeight: '700' }}>
                                         {project.title}
                                     </h3>
                                     <div style={{ display: 'flex', gap: '1rem' }}>
-                                        <a href="#" style={{ color: 'var(--color-text-light)' }}><Github size={20} /></a>
-                                        <a href="#" style={{ color: 'var(--color-text-light)' }}><ExternalLink size={20} /></a>
+                                        <a href="#" style={{ color: 'var(--color-text)', transition: 'color 0.3s ease' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-accent)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text)'}><Github size={18} /></a>
+                                        <a href="#" style={{ color: 'var(--color-text)', transition: 'color 0.3s ease' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-accent)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text)'}><ExternalLink size={18} /></a>
                                     </div>
                                 </div>
-                                <p style={{ fontSize: '0.9rem', marginBottom: '1rem', color: 'var(--color-text)', flex: 1 }}>
+                                <p style={{ fontSize: '0.95rem', marginBottom: '1rem', color: 'var(--color-text)', lineHeight: '1.6' }}>
                                     {project.description}
                                 </p>
-                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: 'auto' }}>
+                                
+                                {project.results && (
+                                    <div style={{ backgroundColor: 'rgba(100, 255, 218, 0.05)', padding: '0.75rem', borderRadius: '4px', marginBottom: '1.5rem', borderLeft: '2px solid var(--color-accent)' }}>
+                                        <p style={{ fontSize: '0.85rem', color: 'var(--color-text-light)', fontStyle: 'italic', margin: 0 }}>
+                                            <strong style={{ color: 'var(--color-accent)', fontStyle: 'normal' }}>Result:</strong> {project.results}
+                                        </p>
+                                    </div>
+                                )}
+
+                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginTop: 'auto' }}>
                                     {project.tags.map((tag) => (
-                                        <span key={tag} style={{ fontSize: '0.8rem', color: 'var(--color-accent)', fontFamily: 'var(--font-mono)' }}>
+                                        <span key={tag} style={{ fontSize: '0.75rem', color: 'var(--color-accent)', fontFamily: 'var(--font-mono)', border: '1px solid var(--color-accent)', padding: '2px 8px', borderRadius: '4px' }}>
                                             {tag}
                                         </span>
                                     ))}

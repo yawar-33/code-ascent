@@ -48,7 +48,7 @@ const WhyChooseUs = () => {
   };
 
   return (
-    <section className="section bg-[var(--color-primary)]/50 relative overflow-hidden">
+    <section id="why-choose-us" className="section bg-[var(--color-primary)]/50 relative overflow-hidden">
         {/* Background Decorative Elements */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-5">
             <div className="absolute -top-20 -left-20 w-96 h-96 bg-[var(--color-accent)] rounded-full blur-3xl opacity-20"></div>

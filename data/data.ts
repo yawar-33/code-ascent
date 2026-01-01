@@ -10,6 +10,7 @@ export const projects = [
     tags: ['React', 'D3.js', 'Node.js'],
     image: '/assets/fintech.png',
     link: '#',
+    results: '30% increase in data processing efficiency.',
   },
   {
     id: 'ecommerce-platform',
@@ -21,6 +22,7 @@ export const projects = [
     tags: ['Next.js', 'Stripe', 'PostgreSQL'],
     image: '/assets/ecommerce.png',
     link: '#',
+    results: '25% boost in average order value via AI.',
   },
   {
     id: 'healthcare-app',
@@ -32,6 +34,7 @@ export const projects = [
     tags: ['Flutter', 'WebRTC', 'Firebase'],
     image: '/assets/healthcare.png',
     link: '#',
+    results: '99.9% uptime for critical medical calls.',
   },
   {
     id: 'smarthome-iot',
@@ -43,6 +46,7 @@ export const projects = [
     tags: ['React Native', 'IoT', 'MQTT'],
     image: '/assets/smarthome.png',
     link: '#',
+    results: 'Seamless integration for 15+ device types.',
   },
   {
     id: 'logistics-tracker',
@@ -54,6 +58,7 @@ export const projects = [
     tags: ['Vue.js', 'Python', 'Google Maps API'],
     image: '/assets/logistics.png',
     link: '#',
+    results: '15% reduction in delivery fuel costs.',
   },
   {
     id: 'education-platform',
@@ -65,6 +70,7 @@ export const projects = [
     tags: ['React', 'Django', 'AWS'],
     image: '/assets/education.png',
     link: '#',
+    results: '50,000+ active students globally.',
   },
 ];
 
@@ -73,42 +79,48 @@ export const services = [
     id: 'software-development',
     title: 'Software Development',
     description: 'Custom software solutions tailored to your business needs. We build scalable and robust applications.',
-    details: 'We follow a rigorous SDLC process to deliver high-quality software. Our team is proficient in modern architectures like Microservices and Serverless.',
+    fullDescription: 'Our custom software development services are designed to address your unique business challenges. We combine technical expertise with industry best practices to deliver solutions that drive growth and efficiency.',
+    features: ['Custom Enterprise Software', 'Microservices Architecture', 'Legacy System Modernization', 'API Development & Integration'],
     iconName: 'Code',
   },
   {
     id: 'mobile-app-development',
     title: 'Mobile App Development',
     description: 'Native and cross-platform mobile apps for iOS and Android using Flutter and React Native.',
-    details: 'From consumer-facing apps to enterprise mobility solutions, we build apps that provide excellent user experiences on all devices.',
+    fullDescription: 'We create high-performance mobile applications that provide seamless user experiences. Whether it is a consumer-facing app or an enterprise tool, we ensure top-notch quality and security.',
+    features: ['iOS & Android Development', 'Cross-Platform Solutions (Flutter/RN)', 'Mobile UI/UX Design', 'App Store Optimization'],
     iconName: 'Smartphone',
   },
   {
     id: 'web-applications',
     title: 'Web Applications',
     description: 'Modern, responsive, and high-performance web applications using React, Next.js, and Node.js.',
-    details: 'We build SPAs and PWAs that feel like native apps. SEO optimization and performance are baked into our development process.',
+    fullDescription: 'Our web development team builds fast, secure, and SEO-friendly applications. We leverage the latest technologies to ensure your web presence is both powerful and scalable.',
+    features: ['Progressive Web Apps (PWA)', 'Single Page Applications (SPA)', 'E-commerce Solutions', 'Full-stack Development'],
     iconName: 'Globe',
   },
   {
     id: 'erp-solutions',
     title: 'ERP Solutions',
     description: 'Comprehensive ERP systems to streamline your business operations and improve efficiency.',
-    details: 'We implement and customize ERP solutions to integrate all facets of an operation, including product planning, development, manufacturing, sales and marketing.',
+    fullDescription: 'Streamline your business processes with our custom ERP solutions. We integrate all aspects of your operation into a single, unified system for better data visibility and decision-making.',
+    features: ['Inventory Management', 'Financial Tracking', 'HR & Payroll Systems', 'Supply Chain Optimization'],
     iconName: 'Layers',
   },
   {
     id: 'dedicated-teams',
     title: 'Dedicated Teams',
     description: 'Extend your in-house team with our skilled developers. Flexible engagement models.',
-    details: 'Hire a dedicated team of developers, QA engineers, and project managers who work exclusively on your project, integrating seamlessly with your processes.',
+    fullDescription: 'Scale your delivery capacity quickly with our dedicated development teams. Our experts integrate seamlessly with your existing processes and culture to hit the ground running.',
+    features: ['Dedicated Developers', 'QA & DevOps Engineers', 'Project Management', 'Flexible Scaling'],
     iconName: 'Users',
   },
   {
     id: 'cloud-infrastructure',
     title: 'Cloud Infrastructure',
     description: 'Secure and scalable cloud architecture design and migration services (AWS, Azure, GCP).',
-    details: 'We help businesses migrate to the cloud, optimize their existing cloud infrastructure, and implement DevOps best practices.',
+    fullDescription: 'Optimize your cloud presence with our infrastructure services. We provide architecture design, migration support, and ongoing management to ensure maximum performance and security.',
+    features: ['Cloud Migration Strategy', 'DevOps Automation', 'Serverless Architecture', 'Security & Compliance'],
     iconName: 'Server',
   },
 ];
