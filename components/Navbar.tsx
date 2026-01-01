@@ -9,6 +9,7 @@ import { usePathname, useRouter } from 'next/navigation';
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
     const pathname = usePathname();
     const router = useRouter();
 
@@ -16,8 +17,20 @@ const Navbar = () => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 50);
         };
+        
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 1024);
+        };
+
+        handleScroll();
+        handleResize();
+        
         window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('resize', handleResize);
+        };
     }, []);
 
     const navLinks = [
@@ -55,21 +68,19 @@ const Navbar = () => {
 
     return (
         <nav
+            className={`navbar ${ (scrolled || isMobile) ? 'navbar-solid' : 'navbar-transparent' } ${ isOpen ? 'navbar-open' : '' }`}
             style={{
                 position: 'fixed',
                 top: 0,
                 left: 0,
                 right: 0,
                 zIndex: 1000,
-                backgroundColor: scrolled ? 'rgba(10, 25, 47, 0.95)' : 'transparent',
-                backdropFilter: scrolled ? 'blur(10px)' : 'none',
-                boxShadow: scrolled ? '0 10px 30px -10px rgba(2, 12, 27, 0.7)' : 'none',
                 transition: 'all 0.3s ease',
-                padding: scrolled ? '1rem 0' : '1.5rem 0',
+                padding: scrolled ? '0.75rem 0' : '1.25rem 0',
             }}
         >
             <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Link href="/" style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--color-accent)' }}>
+                <Link href="/" style={{ fontSize: 'clamp(1.2rem, 4vw, 1.5rem)', fontWeight: 'bold', color: 'var(--color-accent)' }}>
                     Code Ascent
                 </Link>
 
@@ -107,7 +118,7 @@ const Navbar = () => {
 
                 {/* Mobile Menu Button */}
                 <div className="mobile-menu-btn" onClick={toggleMenu} style={{ cursor: 'pointer', color: 'var(--color-accent)', padding: '5px' }}>
-                    {isOpen ? <X size={28} /> : <Menu size={28} />}
+                    {isOpen ? <X size={24} /> : <Menu size={24} />}
                 </div>
             </div>
 
@@ -124,19 +135,20 @@ const Navbar = () => {
                             top: 0,
                             right: 0,
                             bottom: 0,
-                            width: 'min(75vw, 400px)',
-                            backgroundColor: 'var(--color-primary-light)',
-                            padding: '2rem',
+                            width: 'min(85vw, 320px)',
+                            backgroundColor: '#112240', // Hardcoded solid navy
+                            padding: '3rem 2rem',
                             display: 'flex',
                             flexDirection: 'column',
                             justifyContent: 'center',
                             alignItems: 'center',
-                            boxShadow: '-10px 0 30px -15px rgba(2, 12, 27, 0.7)',
+                            boxShadow: '-10px 0 30px -15px rgba(2, 12, 27, 0.9)',
                             zIndex: 999,
+                            borderLeft: '1px solid rgba(100, 255, 218, 0.2)',
                         }}
                     >
-                        <div style={{ position: 'absolute', top: '2rem', right: '2rem', cursor: 'pointer', color: 'var(--color-accent)' }} onClick={toggleMenu}>
-                            <X size={32} />
+                        <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', cursor: 'pointer', color: 'var(--color-accent)' }} onClick={toggleMenu}>
+                            <X size={28} />
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
                             {navLinks.map((link, index) => (
@@ -156,8 +168,8 @@ const Navbar = () => {
                                     onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-accent)'}
                                     onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text-light)'}
                                 >
-                                    <span style={{ color: 'var(--color-accent)', marginBottom: '5px', fontSize: '0.85rem', fontFamily: 'var(--font-mono)' }}>0{index + 1}.</span>
-                                    {link.name}
+                                    <span style={{ color: 'var(--color-accent)', marginBottom: '5px', fontSize: '0.85rem', fontFamily: 'var(--font-mono)' }}> {link.name}</span>
+                                   
                                 </Link>
                             ))}
                             <a 
@@ -174,7 +186,27 @@ const Navbar = () => {
             </AnimatePresence>
 
             <style jsx global>{`
-        @media (min-width: 768px) {
+        .navbar-solid {
+            background-color: #0a192f !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px -10px rgba(2, 12, 27, 0.9);
+            border-bottom: 1px solid rgba(100, 255, 218, 0.2);
+        }
+
+        .navbar-transparent {
+            background-color: transparent;
+        }
+
+        @media (max-width: 1023px) {
+            .navbar {
+                background-color: #0a192f !important;
+                box-shadow: 0 10px 30px -10px rgba(2, 12, 27, 0.9);
+                border-bottom: 1px solid rgba(100, 255, 218, 0.2);
+            }
+        }
+
+        @media (min-width: 1024px) {
           .desktop-menu { display: block !important; }
           .mobile-menu-btn { display: none !important; }
         }

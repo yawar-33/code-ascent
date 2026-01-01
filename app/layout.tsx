@@ -3,6 +3,7 @@ import { Inter, Fira_Code } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import TechBackground from '@/components/TechBackground';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 const firaCode = Fira_Code({ subsets: ['latin'], variable: '--font-mono' });
@@ -25,8 +26,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${firaCode.variable}`}>
       <body>
+        <TechBackground />
         <Navbar />
-        {children}
+        <main>{children}</main>
         <Footer />
       </body>
     </html>

@@ -17,7 +17,7 @@ const iconMap: Record<string, React.ReactNode> = {
 
 export default function ServicesPage() {
     return (
-        <div style={{ paddingTop: '120px', minHeight: '100vh', backgroundColor: 'var(--color-bg)', paddingBottom: '100px' }}>
+        <div style={{ paddingTop: '120px', minHeight: '100vh', paddingBottom: '100px' }}>
             <div className="container">
                 <motion.div
                     initial={{ opacity: 0, x: -20 }}

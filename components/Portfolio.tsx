@@ -8,7 +8,7 @@ import { projects } from '../data/data';
 
 const Portfolio = () => {
     return (
-        <section id="portfolio" className="section" style={{ backgroundColor: 'var(--color-primary-light)' }}>
+        <section id="portfolio" className="section">
             <div className="container">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -23,7 +23,7 @@ const Portfolio = () => {
                     </h2>
                 </motion.div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
                     {projects.map((project, index) => (
                         <motion.div
                             key={project.id}

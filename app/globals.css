@@ -81,6 +81,12 @@ button {
   padding: 0 var(--spacing-lg);
 }
 
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--spacing-md);
+  }
+}
+
 .section {
   padding: 120px 0;
 }

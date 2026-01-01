@@ -29,7 +29,7 @@ export default function ServiceDetail({ params }: Props) {
     }
 
     return (
-        <div style={{ paddingTop: '120px', minHeight: '100vh', backgroundColor: 'var(--color-bg)', paddingBottom: '100px' }}>
+        <div style={{ paddingTop: '120px', minHeight: '100vh', paddingBottom: '100px' }}>
             <div className="container">
                 {/* Back Link */}
                 <motion.div
@@ -54,7 +54,7 @@ export default function ServiceDetail({ params }: Props) {
                 </motion.div>
 
                 {/* Header Section */}
-                <div style={{ marginBottom: '5rem' }}>
+                <div style={{ marginBottom: 'clamp(3rem, 10vw, 5rem)' }}>
                     <motion.div
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -68,7 +68,7 @@ export default function ServiceDetail({ params }: Props) {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.2 }}
                         style={{ 
-                            fontSize: 'clamp(2.5rem, 8vw, 4.5rem)', 
+                            fontSize: 'clamp(2rem, 8vw, 4.5rem)', 
                             color: 'var(--color-text-light)', 
                             marginBottom: '1.5rem', 
                             fontWeight: 'bold',
@@ -82,7 +82,7 @@ export default function ServiceDetail({ params }: Props) {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.3 }}
                         style={{ 
-                            fontSize: '1.25rem', 
+                            fontSize: 'clamp(1rem, 2vw, 1.25rem)', 
                             color: 'var(--color-text)', 
                             maxWidth: '800px', 
                             lineHeight: 1.6 
@@ -93,7 +93,7 @@ export default function ServiceDetail({ params }: Props) {
                 </div>
 
                 {/* Content Grid */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'clamp(2rem, 8vw, 4rem)' }}>
                     {/* Features List */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -114,7 +114,7 @@ export default function ServiceDetail({ params }: Props) {
                                     transition={{ duration: 0.3, delay: idx * 0.1 }}
                                     style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}
                                 >
-                                    <CheckCircle2 size={24} style={{ color: 'var(--color-accent)', flexShrink: 0 }} />
+                                    <CheckCircle2 size={24} style={{ color: 'var(--color-accent)', flexShrink: 0, marginTop: '2px' }} />
                                     <span style={{ fontSize: '1.1rem', color: 'var(--color-text)', lineHeight: 1.4 }}>{feature}</span>
                                 </motion.div>
                             ))}
@@ -128,10 +128,10 @@ export default function ServiceDetail({ params }: Props) {
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: 0.2 }}
                         style={{ 
-                            backgroundColor: 'var(--color-primary-light)', 
-                            padding: '3rem', 
+                            backgroundColor: 'rgba(255, 255, 255, 0.02)', 
+                            padding: 'clamp(2rem, 5vw, 3rem)', 
                             borderRadius: '16px', 
-                            border: '1px solid rgba(100, 255, 218, 0.1)',
+                            border: '1px solid rgba(255, 255, 255, 0.05)',
                             textAlign: 'center',
                             alignSelf: 'start'
                         }}
@@ -139,13 +139,13 @@ export default function ServiceDetail({ params }: Props) {
                         <h3 style={{ fontSize: '1.5rem', color: 'var(--color-text-light)', marginBottom: '1rem', fontWeight: '700' }}>
                             Ready to get started?
                         </h3>
-                        <p style={{ color: 'var(--color-text)', marginBottom: '2rem' }}>
+                        <p style={{ color: 'var(--color-text)', marginBottom: '2rem', fontSize: '1rem' }}>
                             Transform your business with our {service.title.toLowerCase()} expertise.
                         </p>
                         <Link 
                             href="/#contact" 
                             className="btn-filled"
-                            style={{ width: '100%', textAlign: 'center' }}
+                            style={{ width: '100%', textAlign: 'center', padding: '1rem' }}
                         >
                             Get a Consultation
                         </Link>

@@ -17,7 +17,7 @@ const iconMap: Record<string, React.ReactNode> = {
 
 const Services = () => {
     return (
-        <section id="services" className="section" style={{ backgroundColor: 'var(--color-bg)' }}>
+        <section id="services" className="section">
             <div className="container">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -33,8 +33,8 @@ const Services = () => {
 
                 <div style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-                    gap: '2.5rem'
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                    gap: '2rem'
                 }}>
                     {services.map((service, index) => (
                         <motion.div

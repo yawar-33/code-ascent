@@ -16,7 +16,7 @@ const About = () => {
     ];
 
     return (
-        <section id="about" className="section" style={{ backgroundColor: 'var(--color-primary-light)' }}>
+        <section id="about" className="section">
             <div className="container">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -31,32 +31,32 @@ const About = () => {
                     </h2>
                 </motion.div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', marginTop: '3rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '3rem', marginTop: '3rem' }}>
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: 0.2 }}
                     >
-                        <p style={{ marginBottom: '1.5rem', fontSize: '1.1rem' }}>
+                        <p style={{ marginBottom: '1.5rem', fontSize: '1.1rem', lineHeight: '1.7' }}>
                             We are a team of passionate developers, designers, and strategists dedicated to building cutting-edge software solutions.
                             Founded in 2015, we have grown from a small startup to a full-service software house.
                         </p>
-                        <p style={{ marginBottom: '1.5rem', fontSize: '1.1rem' }}>
+                        <p style={{ marginBottom: '1.5rem', fontSize: '1.1rem', lineHeight: '1.7' }}>
                             Our expertise spans across the entire software development lifecycle, from concept to deployment.
                             We believe in writing clean, maintainable code and designing intuitive user interfaces.
                         </p>
 
-                        <h3 style={{ fontSize: '1.2rem', marginTop: '2rem', color: 'var(--color-text-light)' }}>Our Tech Stack</h3>
+                        <h3 style={{ fontSize: '1.2rem', marginTop: '2.5rem', color: 'var(--color-text-light)', fontWeight: 'bold' }}>Our Tech Stack</h3>
                         <ul style={{
                             display: 'grid',
-                            gridTemplateColumns: 'repeat(2, minmax(140px, 1fr))',
-                            gap: '10px',
+                            gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
+                            gap: '12px',
                             listStyle: 'none',
-                            marginTop: '1rem'
+                            marginTop: '1.2rem'
                         }}>
                             {technologies.map((tech) => (
-                                <li key={tech} style={{ display: 'flex', alignItems: 'center', fontSize: '0.9rem' }}>
+                                <li key={tech} style={{ display: 'flex', alignItems: 'center', fontSize: '0.95rem' }}>
                                     <span style={{ color: 'var(--color-accent)', marginRight: '10px' }}>▹</span>
                                     {tech}
                                 </li>
@@ -71,23 +71,29 @@ const About = () => {
                         transition={{ duration: 0.5, delay: 0.4 }}
                     >
                         {/* Stats Grid */}
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2rem' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '1.5rem' }}>
                             {stats.map((stat, index) => (
                                 <div key={index} style={{
                                     padding: '1.5rem',
-                                    backgroundColor: 'var(--color-bg)',
-                                    borderRadius: '8px',
+                                    backgroundColor: 'rgba(255, 255, 255, 0.02)',
+                                    borderRadius: '12px',
                                     textAlign: 'center',
-                                    border: '1px solid transparent',
-                                    transition: 'border-color 0.3s ease',
+                                    border: '1px solid rgba(255, 255, 255, 0.05)',
+                                    transition: 'all 0.3s ease',
                                 }}
-                                    onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.borderColor = 'var(--color-accent)'}
-                                    onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.borderColor = 'transparent'}
+                                    onMouseEnter={(e) => {
+                                        e.currentTarget.style.borderColor = 'var(--color-accent)';
+                                        e.currentTarget.style.backgroundColor = 'rgba(100, 255, 218, 0.02)';
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.05)';
+                                        e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.02)';
+                                    }}
                                 >
-                                    <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--color-accent)', marginBottom: '0.5rem' }}>
+                                    <div style={{ fontSize: 'clamp(2rem, 5vw, 2.5rem)', fontWeight: 'bold', color: 'var(--color-accent)', marginBottom: '0.5rem' }}>
                                         {stat.value}
                                     </div>
-                                    <div style={{ fontSize: '0.9rem' }}>{stat.label}</div>
+                                    <div style={{ fontSize: '0.85rem', color: 'var(--color-text)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{stat.label}</div>
                                 </div>
                             ))}
                         </div>

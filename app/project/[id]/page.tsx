@@ -24,7 +24,7 @@ export default function ProjectDetail({ params }: Props) {
   const nextProject = projects[(currentIndex + 1) % projects.length];
 
   return (
-    <div style={{ paddingTop: '100px', minHeight: '100vh', backgroundColor: 'var(--color-bg)' }}>
+    <div style={{ paddingTop: '100px', minHeight: '100vh' }}>
         <div className="container">
             <motion.div
                 initial={{ opacity: 0, x: -20 }}
@@ -70,7 +70,7 @@ export default function ProjectDetail({ params }: Props) {
                 </motion.div>
             )}
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', marginBottom: '6rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'clamp(2rem, 8vw, 4rem)', marginBottom: 'clamp(3rem, 10vw, 6rem)' }}>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -80,7 +80,7 @@ export default function ProjectDetail({ params }: Props) {
                     <h3 style={{ fontSize: '1.8rem', color: 'var(--color-text-light)', marginBottom: '1.5rem', borderBottom: '1px solid var(--color-accent)', paddingBottom: '0.5rem', display: 'inline-block' }}>Overview</h3>
                     <p style={{ marginBottom: '2.5rem', fontSize: '1.1rem', lineHeight: '1.8', color: 'var(--color-text)' }}>{project.fullDescription}</p>
 
-                    <div style={{ display: 'flex', gap: '2rem' }}>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
                         <a href={project.link} className="btn-primary" style={{ display: 'flex', alignItems: 'center', color: 'var(--color-accent)', fontWeight: 'bold', gap: '8px', border: '1px solid var(--color-accent)', padding: '10px 20px', borderRadius: '4px', transition: 'all 0.3s ease' }}>
                             Live Demo <ExternalLink size={18} />
                         </a>
@@ -96,13 +96,13 @@ export default function ProjectDetail({ params }: Props) {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.2 }}
                 >
-                    <div style={{ marginBottom: '3rem', padding: '2rem', backgroundColor: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
-                        <h3 style={{ fontSize: '1.4rem', color: 'var(--color-accent)', marginBottom: '1rem', fontFamily: 'var(--font-mono)' }}>01. The Challenge</h3>
-                        <p style={{ lineHeight: '1.7' }}>{project.challenge}</p>
+                    <div style={{ marginBottom: '2rem', padding: '1.5rem lg:2rem', backgroundColor: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                        <h3 style={{ fontSize: '1.25rem lg:1.4rem', color: 'var(--color-accent)', marginBottom: '1rem', fontFamily: 'var(--font-mono)' }}>01. The Challenge</h3>
+                        <p style={{ lineHeight: '1.7', fontSize: '0.95rem lg:1rem' }}>{project.challenge}</p>
                     </div>
-                    <div style={{ padding: '2rem', backgroundColor: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
-                        <h3 style={{ fontSize: '1.4rem', color: 'var(--color-accent)', marginBottom: '1rem', fontFamily: 'var(--font-mono)' }}>02. The Solution</h3>
-                        <p style={{ lineHeight: '1.7' }}>{project.solution}</p>
+                    <div style={{ padding: '1.5rem lg:2rem', backgroundColor: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                        <h3 style={{ fontSize: '1.25rem lg:1.4rem', color: 'var(--color-accent)', marginBottom: '1rem', fontFamily: 'var(--font-mono)' }}>02. The Solution</h3>
+                        <p style={{ lineHeight: '1.7', fontSize: '0.95rem lg:1rem' }}>{project.solution}</p>
                     </div>
                 </motion.div>
             </div>
