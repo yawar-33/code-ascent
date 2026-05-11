@@ -2,58 +2,45 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Code, Zap, GitMerge, Layout, CheckCircle, Smartphone, Globe, Cloud } from "lucide-react";
+import { Code, GitMerge, Layout, CheckCircle, Cloud, ArrowRight, Star, Shield, Zap } from "lucide-react";
 
 const Hero = () => {
-  const descriptions = [
-    "We are a software development company specializing in building exceptional digital experiences. From mobile apps to enterprise ERP solutions, we transform ideas into reality.",
-    "Empowering businesses with scalable cloud infrastructure and dedicated development teams that integrate seamlessly with your vision.",
-    "Crafting intuitive mobile applications and robust web platforms using cutting-edge technologies like React, Flutter, and Node.js.",
-    "Delivering custom ERP solutions that streamline operations and drive efficiency for enterprises worldwide.",
-  ];
-
-  const headlines = [
-    "We build digital experiences.",
-  ];
-
-  const [index, setIndex] = useState(0);
+  const [currentWord, setCurrentWord] = useState(0);
+  const words = ["Software", "Mobile Apps", "Web Platforms", "ERP Systems"];
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setIndex((prevIndex) => prevIndex + 1);
-    }, 5000);
-
+      setCurrentWord((prev) => (prev + 1) % words.length);
+    }, 2500);
     return () => clearInterval(timer);
   }, []);
 
-  // Animation variants
   const floatingVariant = {
     animate: {
-      y: [0, -10, 0],
-      transition: {
-        duration: 3,
-        repeat: Infinity,
-        ease: "easeInOut" as const,
-      },
+      y: [0, -12, 0],
+      transition: { duration: 3.5, repeat: Infinity, ease: "easeInOut" as const },
+    },
+  };
+
+  const floatingVariant2 = {
+    animate: {
+      y: [0, -8, 0],
+      transition: { duration: 4, repeat: Infinity, ease: "easeInOut" as const, delay: 1 },
     },
   };
 
   const pulseVariant = {
     animate: {
-      scale: [1, 1.05, 1],
-      opacity: [1, 0.8, 1],
-      transition: {
-        duration: 2,
-        repeat: Infinity,
-        ease: "easeInOut" as const,
-      },
+      scale: [1, 1.06, 1],
+      opacity: [0.8, 1, 0.8],
+      transition: { duration: 2.5, repeat: Infinity, ease: "easeInOut" as const },
     },
   };
+
 
   return (
     <section
       id="home"
-      className="section"
       style={{
         minHeight: "100vh",
         display: "flex",
@@ -61,162 +48,386 @@ const Hero = () => {
         justifyContent: "center",
         position: "relative",
         overflow: "hidden",
+        paddingTop: "80px",
       }}
     >
-      <style jsx>{`
-        #home {
-          padding-top: 80px;
-        }
-        @media (min-width: 1024px) {
-          #home {
-            padding-top: 0;
-          }
-        }
-      `}</style>
-      <div className="container mx-auto px-4 h-full flex flex-col lg:flex-row items-center justify-between gap-20 py-20 lg:py-0">
-        {/* Left Column: Text Content */}
-        <div className="w-full lg:w-1/2 flex flex-col justify-center order-1 lg:order-1 z-20 text-center lg:text-left">
-          
-          {/* Main Headline */}
-          <div style={{ marginBottom: "1rem" }}>
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.3 }}
-                >
-                    <h1 style={{
-                        fontSize: 'clamp(28px, 9vw, 56px)',
-                        fontWeight: 'bold',
-                        color: 'var(--color-text-light)',
-                        lineHeight: 1.1,
-                        marginBottom: '1.5rem'
-                    }}>
-                        We build digital experiences <br className="hidden md:inline" />
-                        <span style={{ color: 'var(--color-accent)' }}>that grow revenue.</span>
-                    </h1>
-                </motion.div>
-          </div>
+      <div className="container mx-auto px-4" style={{ width: "100%" }}>
+        <div style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "3rem",
+          flexWrap: "wrap",
+          padding: "3rem 0",
+        }}>
 
-          <div
-            style={{
-              maxWidth: "600px",
-              marginBottom: "2.5rem",
-              margin: "0 auto lg:0"
-            }}
-          >
+          {/* Left Column */}
+          <div style={{ flex: "1 1 500px", maxWidth: "620px" }}>
+
+            {/* Top Badge */}
             <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-            >
-                <p style={{ fontSize: "clamp(1rem, 2.2vw, 1.25rem)", color: "var(--color-text-light)", marginBottom: "1.2rem", lineHeight: 1.5 }}>
-                    We craft scalable software, beautiful interfaces, and digital tools that users love.
-                </p>
-                <p style={{ fontSize: "clamp(0.9rem, 2vw, 1.1rem)", color: "var(--color-text)", fontWeight: 500 }}>
-                    From idea to launch — we’re your full-stack partner.
-                </p>
-            </motion.div>
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-          >
-            <a
-              href="#portfolio"
-              className="btn-primary"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
               style={{
-                display: "inline-block",
-                padding: "1rem 2.5rem",
-                fontSize: "1rem",
-                marginTop: "0.5rem"
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                backgroundColor: "rgba(100,255,218,0.08)",
+                border: "1px solid rgba(100,255,218,0.3)",
+                borderRadius: "50px",
+                padding: "0.4rem 1rem",
+                marginBottom: "1.5rem",
               }}
             >
-              Check out our work
-            </a>
-          </motion.div>
-        </div>
+              <Star size={14} style={{ color: "var(--color-accent)" }} />
+              <span style={{ fontSize: "0.8rem", color: "var(--color-accent)", fontFamily: "var(--font-mono)", letterSpacing: "0.05em" }}>
+                Top-Rated Software Development Company
+              </span>
+            </motion.div>
 
-        {/* Right Column: Enhanced Visual Animations */}
-        <div className="w-full lg:w-1/2 flex justify-center lg:justify-end order-2 lg:order-2 relative py-10 lg:py-0 scale-75 md:scale-90 lg:scale-100 origin-center lg:origin-right">
-          {/* Main Container */}
-          <div className="relative w-full max-w-[400px] md:max-w-lg aspect-square">
-            
-            {/* 1. Code Card (Top Left) */}
+            {/* Main Headline */}
             <motion.div
-              variants={floatingVariant}
-              animate="animate"
-              className="absolute top-0 left-0 -ml-4 md:-ml-8 w-56 md:w-64 p-3 md:p-4 rounded-xl bg-[#1e293b]/90 border border-[var(--color-accent)]/20 backdrop-blur-md shadow-2xl z-20"
-              style={{ rotate: -5 }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <div className="flex items-center gap-2 mb-3 border-b border-gray-700 pb-2">
-                <div className="flex gap-1.5">
-                  <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
+              <h1 style={{
+                fontSize: "clamp(2.2rem, 5.5vw, 3.8rem)",
+                fontWeight: 800,
+                color: "var(--color-text-light)",
+                lineHeight: 1.1,
+                marginBottom: "0.5rem",
+                letterSpacing: "-0.02em",
+              }}>
+                We Engineer
+              </h1>
+              <h1 style={{
+                fontSize: "clamp(2.2rem, 5.5vw, 3.8rem)",
+                fontWeight: 800,
+                lineHeight: 1.1,
+                marginBottom: "1.5rem",
+                letterSpacing: "-0.02em",
+                display: "flex",
+                alignItems: "center",
+                flexWrap: "wrap",
+                gap: "0.4rem",
+              }}>
+                <span style={{
+                  background: "linear-gradient(135deg, var(--color-accent) 0%, #4dd9f0 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}>
+                  <AnimatePresence mode="wait">
+                    <motion.span
+                      key={currentWord}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.35 }}
+                      style={{ display: "inline-block" }}
+                    >
+                      {words[currentWord]}
+                    </motion.span>
+                  </AnimatePresence>
+                </span>
+                <span style={{ color: "var(--color-text-light)" }}>That Performs.</span>
+              </h1>
+            </motion.div>
+
+            {/* Subtitle */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.35 }}
+              style={{
+                fontSize: "clamp(1rem, 2vw, 1.15rem)",
+                color: "var(--color-text)",
+                lineHeight: 1.75,
+                marginBottom: "2rem",
+                maxWidth: "540px",
+              }}
+            >
+              Code Ascent is a full-service software development company. We build
+              custom web apps, mobile apps, ERP systems, and cloud solutions for
+              <strong style={{ color: "var(--color-text-light)" }}> businesses worldwide</strong> — from startups to enterprises.
+            </motion.p>
+
+            {/* Trust Pillars */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.45 }}
+              style={{ display: "flex", flexWrap: "wrap", gap: "1.25rem", marginBottom: "2.5rem" }}
+            >
+              {[
+                { icon: <CheckCircle size={15} />, text: "200+ Projects Delivered" },
+                { icon: <Shield size={15} />, text: "10+ Years Experience" },
+                { icon: <Zap size={15} />, text: "Agile & Fast Delivery" },
+              ].map((item, i) => (
+                <div key={i} style={{ display: "flex", alignItems: "center", gap: "6px", color: "var(--color-text)" }}>
+                  <span style={{ color: "var(--color-accent)" }}>{item.icon}</span>
+                  <span style={{ fontSize: "0.85rem", fontWeight: 500 }}>{item.text}</span>
                 </div>
-                <span className="text-[10px] text-gray-400 font-mono ml-2">App.tsx</span>
-              </div>
-              <div className="font-mono text-[10px] md:text-xs space-y-1">
-                <div className="text-purple-400">const <span className="text-blue-400">App</span> = () ={">"} {"{"}</div>
-                <div className="pl-3 text-gray-300">return (</div>
-                <div className="pl-6 text-green-400">{"<CodeAscent />"}</div>
-                <div className="pl-3 text-gray-300">);</div>
-                <div className="text-purple-400">{"}"};</div>
-              </div>
+              ))}
             </motion.div>
 
-            {/* 2. Performance Gauge (Top Right) */}
+            {/* CTA Buttons */}
             <motion.div
-               variants={floatingVariant}
-               animate="animate"
-               transition={{ delay: 1 }}
-               className="absolute top-8 md:top-10 right-0 -mr-4 md:-right-4 w-40 md:w-48 p-3 md:p-4 rounded-xl bg-[#1e293b]/90 border border-[var(--color-accent)]/20 backdrop-blur-md shadow-2xl z-10 flex flex-col items-center"
-               style={{ rotate: 5 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.55 }}
+              style={{ display: "flex", gap: "1rem", flexWrap: "wrap", marginBottom: "3rem" }}
             >
-                <div className="relative w-20 h-10 md:w-24 md:h-12 overflow-hidden mb-2">
-                    <div className="absolute top-0 left-0 w-20 h-20 md:w-24 md:h-24 rounded-full border-4 md:border-8 border-gray-700" />
-                    <motion.div 
-                        className="absolute top-0 left-0 w-20 h-20 md:w-24 md:h-24 rounded-full border-4 md:border-8 border-transparent border-t-[var(--color-accent)] border-r-[var(--color-accent)]"
-                        style={{ rotate: -45 }}
-                        animate={{ rotate: [ -45, 45, -45 ] }}
-                        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                    />
+              <a
+                href="#contact"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  padding: "0.9rem 2rem",
+                  background: "linear-gradient(135deg, var(--color-accent) 0%, #4dd9f0 100%)",
+                  color: "var(--color-primary)",
+                  borderRadius: "6px",
+                  fontWeight: 700,
+                  fontSize: "0.95rem",
+                  textDecoration: "none",
+                  transition: "all 0.3s ease",
+                  boxShadow: "0 4px 20px rgba(100,255,218,0.25)",
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 30px rgba(100,255,218,0.35)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 4px 20px rgba(100,255,218,0.25)"; }}
+              >
+                Get a Free Consultation <ArrowRight size={16} />
+              </a>
+              <a
+                href="#portfolio"
+                className="btn-primary"
+                style={{ padding: "0.9rem 2rem", fontSize: "0.95rem" }}
+              >
+                View Our Work
+              </a>
+            </motion.div>
+
+            {/* Global Highlights */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
+            >
+              <p style={{ fontSize: "0.75rem", color: "var(--color-text)", marginBottom: "0.6rem", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+                Trusted by clients worldwide
+              </p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.6rem" }}>
+                {["🌍 Global Delivery", "⚡ Fast Turnaround", "🔒 Secure & Scalable", "🤝 Long-Term Partners"].map((badge) => (
+                  <span key={badge} style={{
+                    display: "inline-block",
+                    padding: "0.3rem 0.75rem",
+                    backgroundColor: "rgba(255,255,255,0.04)",
+                    border: "1px solid rgba(255,255,255,0.08)",
+                    borderRadius: "4px",
+                    fontSize: "0.8rem",
+                    color: "var(--color-text-light)",
+                    fontWeight: 500,
+                  }}>
+                    {badge}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Right Column: Visual Animation */}
+          <div style={{ flex: "1 1 360px", display: "flex", justifyContent: "center", alignItems: "center", minHeight: "400px" }}>
+            <div style={{ position: "relative", width: "360px", height: "380px" }}>
+
+              {/* Code Card */}
+              <motion.div
+                variants={floatingVariant}
+                animate="animate"
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "220px",
+                  padding: "1.1rem",
+                  borderRadius: "14px",
+                  backgroundColor: "rgba(17,34,64,0.95)",
+                  border: "1px solid rgba(100,255,218,0.2)",
+                  backdropFilter: "blur(12px)",
+                  boxShadow: "0 20px 60px rgba(0,0,0,0.4)",
+                  zIndex: 20,
+                  rotate: -4,
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "10px", paddingBottom: "8px", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+                  <div style={{ width: "10px", height: "10px", borderRadius: "50%", backgroundColor: "#ff5f57" }} />
+                  <div style={{ width: "10px", height: "10px", borderRadius: "50%", backgroundColor: "#febc2e" }} />
+                  <div style={{ width: "10px", height: "10px", borderRadius: "50%", backgroundColor: "#28c840" }} />
+                  <span style={{ fontSize: "10px", color: "rgba(255,255,255,0.4)", fontFamily: "var(--font-mono)", marginLeft: "6px" }}>solution.ts</span>
                 </div>
-                <div className="text-[var(--color-accent)] font-bold text-lg md:text-xl">100%</div>
-                <span className="text-[10px] text-gray-400 font-mono">Performance</span>
-            </motion.div>
+                <div style={{ fontFamily: "var(--font-mono)", fontSize: "11px", lineHeight: "1.7" }}>
+                  <div style={{ color: "#c792ea" }}>const <span style={{ color: "#82aaff" }}>build</span> = async () =&gt; {"{"}</div>
+                  <div style={{ paddingLeft: "14px", color: "#a6accd" }}>const idea = <span style={{ color: "#c3e88d" }}>"yours"</span>;</div>
+                  <div style={{ paddingLeft: "14px", color: "#a6accd" }}>return <span style={{ color: "#64ffda" }}>deploy</span>(idea);</div>
+                  <div style={{ color: "#c792ea" }}>{"}"}</div>
+                  <div style={{ color: "#89ddff", marginTop: "6px" }}>// 🚀 Built by Code Ascent</div>
+                </div>
+              </motion.div>
 
-            {/* 3. SDLC Cycle (Bottom Center) - Hidden on very small screens to save space */}
-            <motion.div
-               className="absolute bottom-4 md:bottom-0 left-1/2 transform -translate-x-1/2 w-60 h-60 md:w-72 md:h-72 rounded-full border border-[var(--color-accent)]/10 flex items-center justify-center z-0"
-               animate={{ rotate: 360 }}
-               transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            >
-               {/* Orbital Icons */}
-                <div className="absolute -top-3 md:-top-4 bg-[#0f172a] p-1.5 md:p-2 rounded-full border border-[var(--color-accent)] text-[var(--color-accent)]"><Layout size={18}/></div>
-                <div className="absolute -bottom-3 md:-bottom-4 bg-[#0f172a] p-1.5 md:p-2 rounded-full border border-[var(--color-accent)] text-[var(--color-accent)]"><CheckCircle size={18}/></div>
-                <div className="absolute -left-3 md:-left-4 bg-[#0f172a] p-1.5 md:p-2 rounded-full border border-[var(--color-accent)] text-[var(--color-accent)]"><GitMerge size={18}/></div>
-                <div className="absolute -right-3 md:-right-4 bg-[#0f172a] p-1.5 md:p-2 rounded-full border border-[var(--color-accent)] text-[var(--color-accent)]"><Cloud size={18}/></div>
-            </motion.div>
+              {/* Performance Card */}
+              <motion.div
+                variants={floatingVariant2}
+                animate="animate"
+                style={{
+                  position: "absolute",
+                  top: "30px",
+                  right: 0,
+                  width: "155px",
+                  padding: "1rem",
+                  borderRadius: "14px",
+                  backgroundColor: "rgba(17,34,64,0.95)",
+                  border: "1px solid rgba(100,255,218,0.2)",
+                  backdropFilter: "blur(12px)",
+                  boxShadow: "0 20px 60px rgba(0,0,0,0.4)",
+                  zIndex: 10,
+                  rotate: 4,
+                  textAlign: "center",
+                }}
+              >
+                <div style={{ fontSize: "10px", color: "rgba(255,255,255,0.4)", fontFamily: "var(--font-mono)", marginBottom: "6px" }}>Lighthouse Score</div>
+                <div style={{ fontSize: "2.4rem", fontWeight: 800, color: "var(--color-accent)", lineHeight: 1 }}>100</div>
+                <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.5)", marginTop: "4px" }}>Performance</div>
+                <div style={{ display: "flex", justifyContent: "center", gap: "4px", marginTop: "10px" }}>
+                  {["Perf", "A11y", "SEO"].map((l) => (
+                    <span key={l} style={{ fontSize: "9px", padding: "2px 6px", borderRadius: "4px", backgroundColor: "rgba(100,255,218,0.1)", color: "var(--color-accent)", fontFamily: "var(--font-mono)" }}>{l}</span>
+                  ))}
+                </div>
+              </motion.div>
 
-            {/* Central Hub */}
-            <motion.div
+              {/* Orbit ring */}
+              <motion.div
+                style={{
+                  position: "absolute",
+                  bottom: "20px",
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                  width: "230px",
+                  height: "230px",
+                  borderRadius: "50%",
+                  border: "1px solid rgba(100,255,218,0.12)",
+                }}
+                animate={{ rotate: 360 }}
+                transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+              >
+                <div style={{ position: "absolute", top: "-14px", left: "50%", transform: "translateX(-50%)", backgroundColor: "#0f172a", padding: "6px", borderRadius: "50%", border: "1px solid var(--color-accent)", color: "var(--color-accent)" }}>
+                  <Layout size={16} />
+                </div>
+                <div style={{ position: "absolute", bottom: "-14px", left: "50%", transform: "translateX(-50%)", backgroundColor: "#0f172a", padding: "6px", borderRadius: "50%", border: "1px solid var(--color-accent)", color: "var(--color-accent)" }}>
+                  <CheckCircle size={16} />
+                </div>
+                <div style={{ position: "absolute", left: "-14px", top: "50%", transform: "translateY(-50%)", backgroundColor: "#0f172a", padding: "6px", borderRadius: "50%", border: "1px solid var(--color-accent)", color: "var(--color-accent)" }}>
+                  <GitMerge size={16} />
+                </div>
+                <div style={{ position: "absolute", right: "-14px", top: "50%", transform: "translateY(-50%)", backgroundColor: "#0f172a", padding: "6px", borderRadius: "50%", border: "1px solid var(--color-accent)", color: "var(--color-accent)" }}>
+                  <Cloud size={16} />
+                </div>
+              </motion.div>
+
+              {/* Central Hub */}
+              <motion.div
                 variants={pulseVariant}
                 animate="animate"
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 md:w-32 md:h-32 bg-gradient-to-br from-[var(--color-accent)]/20 to-transparent rounded-full backdrop-blur-sm border border-[var(--color-accent)]/30 flex flex-col items-center justify-center z-10"
-            >
-                <Globe size={32} className="text-[var(--color-accent)] mb-1" />
-                <span className="text-[8px] md:text-[10px] text-[var(--color-text-light)] font-bold tracking-widest">GLOBAL</span>
-            </motion.div>
+                style={{
+                  position: "absolute",
+                  bottom: "50px",
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                  width: "100px",
+                  height: "100px",
+                  borderRadius: "50%",
+                  background: "radial-gradient(circle, rgba(100,255,218,0.15) 0%, transparent 70%)",
+                  border: "1px solid rgba(100,255,218,0.3)",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  zIndex: 5,
+                }}
+              >
+                <Code size={28} style={{ color: "var(--color-accent)" }} />
+                <span style={{ fontSize: "8px", color: "var(--color-text-light)", fontWeight: 700, letterSpacing: "0.12em", marginTop: "4px" }}>CODE ASCENT</span>
+              </motion.div>
 
+              {/* Stats badges */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 1, duration: 0.5 }}
+                style={{
+                  position: "absolute",
+                  bottom: 0,
+                  left: 0,
+                  padding: "0.6rem 0.9rem",
+                  borderRadius: "10px",
+                  backgroundColor: "rgba(17,34,64,0.9)",
+                  border: "1px solid rgba(100,255,218,0.15)",
+                  backdropFilter: "blur(8px)",
+                  zIndex: 25,
+                }}
+              >
+                <div style={{ fontSize: "1.1rem", fontWeight: 800, color: "var(--color-accent)" }}>200+</div>
+                <div style={{ fontSize: "10px", color: "rgba(255,255,255,0.5)", fontFamily: "var(--font-mono)" }}>Projects Done</div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 1.2, duration: 0.5 }}
+                style={{
+                  position: "absolute",
+                  bottom: "60px",
+                  right: 0,
+                  padding: "0.6rem 0.9rem",
+                  borderRadius: "10px",
+                  backgroundColor: "rgba(17,34,64,0.9)",
+                  border: "1px solid rgba(100,255,218,0.15)",
+                  backdropFilter: "blur(8px)",
+                  zIndex: 25,
+                }}
+              >
+                <div style={{ fontSize: "1.1rem", fontWeight: 800, color: "var(--color-accent)" }}>98%</div>
+                <div style={{ fontSize: "10px", color: "rgba(255,255,255,0.5)", fontFamily: "var(--font-mono)" }}>Client Satisfaction</div>
+              </motion.div>
+
+            </div>
           </div>
+
         </div>
       </div>
+
+      {/* Bottom scroll indicator */}
+      <motion.div
+        animate={{ y: [0, 8, 0] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        style={{
+          position: "absolute",
+          bottom: "2rem",
+          left: "50%",
+          transform: "translateX(-50%)",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "6px",
+          opacity: 0.4,
+        }}
+      >
+        <div style={{ width: "1px", height: "40px", background: "linear-gradient(to bottom, var(--color-accent), transparent)" }} />
+      </motion.div>
     </section>
   );
 };
 
 export default Hero;
-

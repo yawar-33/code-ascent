@@ -38,7 +38,7 @@ const Navbar = () => {
         { name: 'About', path: '/about', hash: '#about' },
         { name: 'Services', path: '/services', hash: '#services' },
         { name: 'Portfolio', path: '/', hash: '#portfolio' },
-        // { name: 'Contact', path: '/', hash: '#contact' },
+        { name: 'Contact', path: '/', hash: '#contact' },
     ];
 
     const handleNavClick = (e: React.MouseEvent, link: { path: string; hash: string }) => {

@@ -1,118 +1,243 @@
 "use client";
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ExternalLink, Github, ArrowRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ExternalLink, ArrowRight, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
 import { projects } from '../data/data';
 
+const categories = ['All', 'Finance', 'E-Commerce', 'Healthcare', 'Enterprise', 'Logistics', 'Education'];
+
 const Portfolio = () => {
-    return (
-        <section id="portfolio" className="section">
-            <div className="container">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                >
-                    <h2 style={{ display: 'flex', alignItems: 'center', fontSize: '2rem', marginBottom: '3rem' }}>
-                        <span style={{ color: 'var(--color-accent)', marginRight: '10px', fontSize: '1.5rem' }}></span>
-                        Featured Projects
-                        <span style={{ height: '1px', backgroundColor: 'var(--color-text-light)', flex: 1, marginLeft: '20px', opacity: 0.3 }}></span>
-                    </h2>
-                </motion.div>
+  const [activeCategory, setActiveCategory] = useState('All');
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
-                    {projects.map((project, index) => (
-                        <motion.div
-                            key={project.id}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
-                            style={{
-                                backgroundColor: 'var(--color-bg)',
-                                borderRadius: '8px',
-                                overflow: 'hidden',
-                                boxShadow: '0 10px 30px -15px rgba(2, 12, 27, 0.7)',
-                                transition: 'transform 0.3s ease',
-                                display: 'flex',
-                                flexDirection: 'column',
-                            }}
-                            whileHover={{ y: -10 }}
-                        >
-                            <div style={{ height: '200px', overflow: 'hidden', position: 'relative' }}>
-                                {project.image ? (
-                                    <img
-                                        src={project.image}
-                                        alt={project.title}
-                                        style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.3s ease' }}
-                                        onMouseEnter={(e) => (e.target as HTMLElement).style.transform = 'scale(1.1)'}
-                                        onMouseLeave={(e) => (e.target as HTMLElement).style.transform = 'scale(1)'}
-                                    />
-                                ) : (
-                                    <div style={{ width: '100%', height: '100%', backgroundColor: 'var(--color-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                        <span style={{ color: 'var(--color-text-light)' }}>Image Coming Soon</span>
-                                    </div>
-                                )}
-                                <div style={{
-                                    position: 'absolute',
-                                    top: 0,
-                                    left: 0,
-                                    right: 0,
-                                    bottom: 0,
-                                    backgroundColor: 'rgba(10, 25, 47, 0.5)',
-                                    opacity: 0,
-                                    transition: 'opacity 0.3s ease',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center'
-                                }}
-                                    onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.opacity = '1'}
-                                    onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.opacity = '0'}
-                                >
-                                    <Link href={`/project/${project.id}`} style={{ color: 'var(--color-secondary)', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '5px' }}>
-                                        View Details <ArrowRight size={18} />
-                                    </Link>
-                                </div>
-                            </div>
-                            <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                                    <h3 style={{ fontSize: '1.3rem', color: 'var(--color-text-light)', margin: 0, fontWeight: '700' }}>
-                                        {project.title}
-                                    </h3>
-                                    <div style={{ display: 'flex', gap: '1rem' }}>
-                                        <a href="#" style={{ color: 'var(--color-text)', transition: 'color 0.3s ease' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-accent)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text)'}><Github size={18} /></a>
-                                        <a href="#" style={{ color: 'var(--color-text)', transition: 'color 0.3s ease' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-accent)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text)'}><ExternalLink size={18} /></a>
-                                    </div>
-                                </div>
-                                <p style={{ fontSize: '0.95rem', marginBottom: '1rem', color: 'var(--color-text)', lineHeight: '1.6' }}>
-                                    {project.description}
-                                </p>
-                                
-                                {project.results && (
-                                    <div style={{ backgroundColor: 'rgba(100, 255, 218, 0.05)', padding: '0.75rem', borderRadius: '4px', marginBottom: '1.5rem', borderLeft: '2px solid var(--color-accent)' }}>
-                                        <p style={{ fontSize: '0.85rem', color: 'var(--color-text-light)', fontStyle: 'italic', margin: 0 }}>
-                                            <strong style={{ color: 'var(--color-accent)', fontStyle: 'normal' }}>Result:</strong> {project.results}
-                                        </p>
-                                    </div>
-                                )}
+  const filtered = activeCategory === 'All'
+    ? projects
+    : projects.filter((p) => p.category === activeCategory);
 
-                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginTop: 'auto' }}>
-                                    {project.tags.map((tag) => (
-                                        <span key={tag} style={{ fontSize: '0.75rem', color: 'var(--color-accent)', fontFamily: 'var(--font-mono)', border: '1px solid var(--color-accent)', padding: '2px 8px', borderRadius: '4px' }}>
-                                            {tag}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                        </motion.div>
-                    ))}
+  return (
+    <section id="portfolio" className="section">
+      <div className="container">
+
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          style={{ marginBottom: '3rem' }}
+        >
+          <p style={{ color: 'var(--color-accent)', fontFamily: 'var(--font-mono)', fontSize: '0.85rem', marginBottom: '0.75rem', letterSpacing: '0.05em' }}>
+            OUR WORK
+          </p>
+          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem' }}>
+            <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.8rem)', fontWeight: 800, color: 'var(--color-text-light)', lineHeight: 1.2, margin: 0 }}>
+              Featured Projects &<br />
+              <span style={{ background: 'linear-gradient(135deg, var(--color-accent) 0%, #4dd9f0 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+                Case Studies
+              </span>
+            </h2>
+            <p style={{ fontSize: '1rem', color: 'var(--color-text)', maxWidth: '360px', lineHeight: 1.7, margin: 0 }}>
+              Real projects. Real results. Built for clients across the globe.
+            </p>
+          </div>
+        </motion.div>
+
+        {/* Category Filter */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem', marginBottom: '3rem' }}
+        >
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              style={{
+                padding: '0.45rem 1.1rem',
+                borderRadius: '50px',
+                border: `1px solid ${activeCategory === cat ? 'var(--color-accent)' : 'rgba(255,255,255,0.1)'}`,
+                backgroundColor: activeCategory === cat ? 'rgba(100,255,218,0.1)' : 'transparent',
+                color: activeCategory === cat ? 'var(--color-accent)' : 'var(--color-text)',
+                fontSize: '0.82rem',
+                fontWeight: 600,
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+                fontFamily: 'var(--font-sans)',
+              }}
+            >
+              {cat}
+            </button>
+          ))}
+        </motion.div>
+
+        {/* Projects Grid */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeCategory}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3 }}
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gap: '1.75rem',
+            }}
+          >
+            {filtered.map((project, index) => (
+              <motion.article
+                key={project.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.07 }}
+                whileHover={{ y: -6 }}
+                style={{
+                  backgroundColor: 'var(--color-primary-light)',
+                  borderRadius: '16px',
+                  overflow: 'hidden',
+                  border: '1px solid rgba(255,255,255,0.06)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = 'rgba(100,255,218,0.25)';
+                  e.currentTarget.style.boxShadow = '0 20px 60px rgba(0,0,0,0.3)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                {/* Project visual */}
+                <div style={{ height: '180px', background: project.gradient, position: 'relative', overflow: 'hidden', flexShrink: 0 }}>
+                  {/* Category badge */}
+                  <div style={{
+                    position: 'absolute',
+                    top: '1rem',
+                    left: '1rem',
+                    padding: '0.3rem 0.75rem',
+                    backgroundColor: 'rgba(10,25,47,0.8)',
+                    borderRadius: '50px',
+                    fontSize: '0.72rem',
+                    color: 'var(--color-accent)',
+                    fontWeight: 600,
+                    border: '1px solid rgba(100,255,218,0.2)',
+                    backdropFilter: 'blur(6px)',
+                  }}>
+                    {project.category}
+                  </div>
+
+                  {/* Hover overlay with link */}
+                  <Link
+                    href={`/project/${project.id}`}
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      backgroundColor: 'rgba(0,0,0,0.4)',
+                      opacity: 0,
+                      transition: 'opacity 0.3s ease',
+                      textDecoration: 'none',
+                      gap: '8px',
+                      color: 'var(--color-text-light)',
+                      fontWeight: 600,
+                      fontSize: '0.9rem',
+                      backdropFilter: 'blur(2px)',
+                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.opacity = '1'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.opacity = '0'; }}
+                  >
+                    View Case Study <ExternalLink size={16} />
+                  </Link>
+
+                  {/* Abstract pattern overlay */}
+                  <div style={{
+                    position: 'absolute',
+                    inset: 0,
+                    backgroundImage: 'radial-gradient(circle at 20% 80%, rgba(100,255,218,0.08) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(77,217,240,0.06) 0%, transparent 50%)',
+                    pointerEvents: 'none',
+                  }} />
                 </div>
-            </div>
-        </section>
-    );
+
+                {/* Content */}
+                <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                  <h3 style={{ fontSize: '1.15rem', color: 'var(--color-text-light)', margin: '0 0 0.6rem', fontWeight: 700 }}>
+                    {project.title}
+                  </h3>
+                  <p style={{ fontSize: '0.9rem', color: 'var(--color-text)', lineHeight: '1.65', marginBottom: '1.25rem', flex: 1 }}>
+                    {project.description}
+                  </p>
+
+                  {/* Result highlight */}
+                  {project.results && (
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: '8px',
+                      backgroundColor: 'rgba(100,255,218,0.05)',
+                      padding: '0.75rem',
+                      borderRadius: '8px',
+                      marginBottom: '1.25rem',
+                      borderLeft: '3px solid var(--color-accent)',
+                    }}>
+                      <TrendingUp size={14} style={{ color: 'var(--color-accent)', flexShrink: 0, marginTop: '2px' }} />
+                      <p style={{ fontSize: '0.82rem', color: 'var(--color-text-light)', margin: 0, lineHeight: 1.5 }}>
+                        {project.results}
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Tags + link */}
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem', marginTop: 'auto' }}>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                      {project.tags.map((tag) => (
+                        <span key={tag} style={{
+                          fontSize: '0.72rem',
+                          color: 'var(--color-accent)',
+                          fontFamily: 'var(--font-mono)',
+                          border: '1px solid rgba(100,255,218,0.25)',
+                          padding: '2px 8px',
+                          borderRadius: '4px',
+                          backgroundColor: 'rgba(100,255,218,0.04)',
+                        }}>
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <Link
+                      href={`/project/${project.id}`}
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '4px',
+                        fontSize: '0.82rem',
+                        color: 'var(--color-accent)',
+                        fontWeight: 600,
+                        textDecoration: 'none',
+                        transition: 'gap 0.2s ease',
+                        flexShrink: 0,
+                      }}
+                      onMouseEnter={(e) => { e.currentTarget.style.gap = '8px'; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.gap = '4px'; }}
+                    >
+                      Details <ArrowRight size={13} />
+                    </Link>
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </motion.div>
+        </AnimatePresence>
+
+      </div>
+    </section>
+  );
 };
 
 export default Portfolio;

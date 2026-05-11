@@ -1,14 +1,13 @@
 "use client";
 
 import React, { useEffect } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 const TechBackground = () => {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
+  const mouseX = useMotionValue(-1000);
+  const mouseY = useMotionValue(-1000);
 
-  // Smooth the mouse movement with spring physics
-  const springConfig = { damping: 25, stiffness: 150 };
+  const springConfig = { damping: 30, stiffness: 120 };
   const smoothX = useSpring(mouseX, springConfig);
   const smoothY = useSpring(mouseY, springConfig);
 
@@ -17,149 +16,148 @@ const TechBackground = () => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
     };
-
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [mouseX, mouseY]);
 
   return (
-    <div className="tech-background" style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-      zIndex: -1,
-      backgroundColor: 'var(--color-bg)',
-      overflow: 'hidden',
-      pointerEvents: 'none',
-    }}>
-      {/* Interactive Pointer Glow */}
-      <motion.div
-        style={{
-          position: 'absolute',
-          top: -250,
-          left: -250,
-          width: 500,
-          height: 500,
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(100, 255, 218, 0.15) 0%, transparent 70%)',
-          x: smoothX,
-          y: smoothY,
-          pointerEvents: 'none',
-          zIndex: 1,
-        }}
-      />
-
-      {/* Subtle Grid Pattern */}
-      <div style={{
-        position: 'absolute',
+    <div
+      style={{
+        position: 'fixed',
         top: 0,
         left: 0,
         width: '100%',
         height: '100%',
-        backgroundImage: `linear-gradient(rgba(100, 255, 218, 0.03) 1px, transparent 1px), 
-                        linear-gradient(90deg, rgba(100, 255, 218, 0.03) 1px, transparent 1px)`,
-        backgroundSize: 'clamp(40px, 5vw, 60px) clamp(40px, 5vw, 60px)',
-      }} />
-
-      {/* Animated Data Flows / Lines */}
-      <svg style={{ position: 'absolute', width: '100%', height: '100%', opacity: 0.15 }}>
-        {[...Array(5)].map((_, i) => (
-          <motion.path
-            key={i}
-            d={`M ${-100} ${20 + i * 20} Q ${500} ${50 + i * 10} ${1200} ${20 + i * 20}`}
-            fill="none"
-            stroke="var(--color-accent)"
-            strokeWidth="0.5"
-            strokeDasharray="10 20"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ 
-              pathLength: [0, 1], 
-              opacity: [0, 1, 0],
-              x: [0, 100],
-            }}
-            transition={{ 
-              duration: 10 + i * 2, 
-              repeat: Infinity, 
-              ease: "linear",
-              delay: i * 3
-            }}
-          />
-        ))}
-        
-        {/* Vertical Pulse Lines */}
-        {[...Array(3)].map((_, i) => (
-           <motion.rect
-            key={`rect-${i}`}
-            x={20 + i * 35 + "%"}
-            y="-10%"
-            width="1"
-            height="120%"
-            fill="var(--color-accent)"
-            initial={{ opacity: 0 }}
-            animate={{ 
-              opacity: [0, 0.1, 0],
-              y: ["-10%", "10%"]
-            }}
-            transition={{ 
-              duration: 15 + i * 5, 
-              repeat: Infinity, 
-              ease: "easeInOut",
-              delay: i * 4
-            }}
-          />
-        ))}
-      </svg>
-
-      {/* Background Soft Glows (Static Atmosphere) */}
-      <motion.div 
-        animate={{ 
-          scale: [1, 1.2, 1],
-          opacity: [0.05, 0.08, 0.05],
-        }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        zIndex: -1,
+        backgroundColor: '#0a192f',
+        overflow: 'hidden',
+        pointerEvents: 'none',
+      }}
+    >
+      {/* ── Subtle dot grid ──────────────────────────────────── */}
+      <div
         style={{
           position: 'absolute',
-          top: '20%',
-          left: '10%',
-          width: '40vw',
-          height: '40vw',
+          inset: 0,
+          backgroundImage:
+            'radial-gradient(rgba(100,255,218,0.18) 1px, transparent 1px)',
+          backgroundSize: '44px 44px',
+          maskImage:
+            'radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%)',
+          WebkitMaskImage:
+            'radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%)',
+          opacity: 0.35,
+        }}
+      />
+
+      {/* ── Orb 1 — top-left, primary teal ──────────────────── */}
+      <motion.div
+        animate={{
+          scale: [1, 1.15, 1],
+          opacity: [0.12, 0.18, 0.12],
+          x: [0, 30, 0],
+          y: [0, -20, 0],
+        }}
+        transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
+        style={{
+          position: 'absolute',
+          top: '-10%',
+          left: '-5%',
+          width: '55vw',
+          height: '55vw',
           borderRadius: '50%',
-          background: 'radial-gradient(circle, var(--color-accent) 0%, transparent 70%)',
+          background:
+            'radial-gradient(circle, rgba(100,255,218,1) 0%, transparent 65%)',
+          filter: 'blur(120px)',
+        }}
+      />
+
+      {/* ── Orb 2 — bottom-right, deeper teal/blue ───────────── */}
+      <motion.div
+        animate={{
+          scale: [1, 1.1, 1],
+          opacity: [0.08, 0.14, 0.08],
+          x: [0, -25, 0],
+          y: [0, 20, 0],
+        }}
+        transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut', delay: 3 }}
+        style={{
+          position: 'absolute',
+          bottom: '-15%',
+          right: '-10%',
+          width: '50vw',
+          height: '50vw',
+          borderRadius: '50%',
+          background:
+            'radial-gradient(circle, rgba(56,189,248,1) 0%, transparent 65%)',
+          filter: 'blur(140px)',
+        }}
+      />
+
+      {/* ── Orb 3 — centre accent (very subtle) ─────────────── */}
+      <motion.div
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.04, 0.09, 0.04],
+        }}
+        transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut', delay: 6 }}
+        style={{
+          position: 'absolute',
+          top: '35%',
+          left: '40%',
+          width: '35vw',
+          height: '35vw',
+          borderRadius: '50%',
+          background:
+            'radial-gradient(circle, rgba(100,255,218,1) 0%, transparent 70%)',
           filter: 'blur(100px)',
         }}
       />
-      <motion.div 
-        animate={{ 
-          scale: [1, 1.1, 1],
-          opacity: [0.03, 0.06, 0.03],
-        }}
-        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+
+      {/* ── Mouse-follow glow ────────────────────────────────── */}
+      <motion.div
         style={{
           position: 'absolute',
-          bottom: '10%',
-          right: '15%',
-          width: '30vw',
-          height: '30vw',
+          top: -200,
+          left: -200,
+          width: 400,
+          height: 400,
           borderRadius: '50%',
-          background: 'radial-gradient(circle, var(--color-accent) 0%, transparent 70%)',
-          filter: 'blur(80px)',
+          background:
+            'radial-gradient(circle, rgba(100,255,218,0.08) 0%, transparent 70%)',
+          x: smoothX,
+          y: smoothY,
+          pointerEvents: 'none',
         }}
       />
 
-      {/* Abstract Code Fragments (Hidden on small screens) */}
-      <div className="hidden md:block" style={{ position: 'absolute', top: '15%', right: '5%', opacity: 0.05, fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--color-accent)' }}>
-        <pre>{`01010110
-11010010
-00110101
-10101111`}</pre>
-      </div>
-      <div className="hidden md:block" style={{ position: 'absolute', bottom: '20%', left: '5%', opacity: 0.05, fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--color-accent)' }}>
-        <pre>{`const data = flow();
-process(ascent);
-deploy(future);`}</pre>
-      </div>
+      {/* ── Top edge gradient vignette ────────────────────────── */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '35%',
+          background:
+            'linear-gradient(to bottom, rgba(10,25,47,0.6) 0%, transparent 100%)',
+          pointerEvents: 'none',
+        }}
+      />
+
+      {/* ── Bottom edge gradient vignette ────────────────────── */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: '30%',
+          background:
+            'linear-gradient(to top, rgba(10,25,47,0.7) 0%, transparent 100%)',
+          pointerEvents: 'none',
+        }}
+      />
     </div>
   );
 };
